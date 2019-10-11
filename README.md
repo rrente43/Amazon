@@ -1,1 +1,3 @@
 # Amazon
+
+amazonCustomer.js was created as a backend application to manage a customer purchasing application that only contains 10 products. Using mySQL, I was able to create a database linked to my js file that would display a table of the product along with the price and stock quantity. Using inquire I prompt the user the ability to purchase an item. As the customer purchases the item the database/stockquantity is updated. 
