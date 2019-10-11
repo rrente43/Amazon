@@ -37,6 +37,7 @@ var display = function (){
     }
     console.log(table.toString());
     console.log("");
+    shopping();
 });
 
 };
@@ -62,7 +63,29 @@ var shopping = function(){
                     name: "quantity",
                     type: "input",
                     message:" How many items would you like to purchase?"
-                })
+                }).then(function(answer2){
+                    var quantity = answer2.quantity;
+                    if (quantity > data[0].stock_quantity){
+                        console.log(" Only + " + data[0].stock_quantity + " items available.")
+                        shopping();
+                    }else{
+                        console.log("");
+                        console.log(data[0].product_name + "purchased");
+                        console.log(quantity + "quantity at $" + data[0].price);
+
+                        var newQuantity = data[0].stock_quantity - quantity;
+                        connection.query(
+                            "UPDATE products1 SET stock_quantity = "+ newQuantity + "WHERE id = " + data[0].id, function(er,resUpdate){
+                               if(err) throw err;
+                               console.log(""); 
+                               console.log("Your order has been Processed."); 
+                               console.log(" Shop at Amazon again!"); 
+                               console.log(""); 
+                               connection.end();
+                            }
+                        ); 
+                    }
+                });
             }
             
         });
